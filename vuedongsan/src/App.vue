@@ -13,7 +13,7 @@
 
 
   <div>
-    원룸샵
+    <h1>원룸샵</h1>
     <img src="./assets/room1.png" alt="" class="room-img">
     <h4 @click="모달창열렸니 = true">{{ products[0] }}원룸</h4>
     <p>50만원</p>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배너를 연습해보자</title>
+  <style>
+    *{margin:0; padding:0;}
+    .banner {width:100%; height:200px; position:relative;}
+    .banner li {width:100%; height:200px; color:#fff; position:absolute; top:0; left:0; display: none;}
+    .on {display: block !important;}
+    .banner li:nth-child(1) {background:darkblue;}
+    .banner li:nth-child(2) {background:violet;}
+    .banner li:nth-child(3) {background:rebeccapurple;}
+
+    .banner2 {width:100%; height:200px; position:relative; overflow: hidden;}
+    .up {animation: upBackgrong 3s both; z-index: 2;}
+    @keyframes upBackgrong{
+      0%{ top: 200px;}
+      100%{top:0px;}
+    }
+    .hide {animation: upHideBackgrong 3s both; z-index: 2;}
+    @keyframes upHideBackgrong{
+      0%{ top: 0px;}
+      100%{top:-200px;}
+    }
+    .banner2 li {width:100%; height:200px; color:#fff; position:absolute; top:0px; left:0; }
+    .banner2 li:nth-child(1) {background:darkblue;}
+    .banner2 li:nth-child(2) {background:violet;}
+    .banner2 li:nth-child(3) {background:rebeccapurple;}
+
+  </style>
+</head>
+<body>
+  <h1>쇽쇽 사라지는 배너를 만들어 봅시다.</h1>
+  <ul class="banner">
+    <li class="on">1번 내용</li>
+    <li>2번 내용</li>
+    <li>3번 내용</li>
+  </ul>
+  
+  <h1>위로 사라지는 배너를 만들어 봅시다.</h1>
+  <ul class="banner2">
+    <li class="up">1번 내용</li>
+    <li>2번 내용</li>
+    <li class="hide">3번 내용</li>
+  </ul>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+  
+  <script>
+    setInterval(rollong,3000);
+    
+    
+    let bannerNumber = 2; // 3초 뒤 시작되는 이벤트에 2번부터 적용하기 위한 숫자
+    function rollong(){
+      $('.banner li').removeClass('on');
+      $('.banner li:nth-child('+bannerNumber+')').addClass('on');
+      bannerNumber += 1 // 순차적으로 +1씩 더해줘라
+      if(bannerNumber > $('.banner li').length){ //만약 배너의 숫자보다 bannerNumber의 숫자가 높아지면 1부터 다시 시작해라
+        bannerNumber = 1;
+      }
+    }
+    
+    setInterval(rollongUp,3000);
+    let bannerNumber2 = 2;
+    let bannerNumber3 = 1;
+    function rollongUp(){
+      $('.banner2 li').removeClass('up');
+      $('.banner2 li').removeClass('hide');
+      $('.banner2 li:nth-child('+bannerNumber2+')').addClass('up');
+      $('.banner2 li:nth-child('+(bannerNumber3)+')').addClass('hide');
+      bannerNumber2 += 1;// 순차적으로 +1씩 더해줘라
+      bannerNumber3 += 1;
+      if(bannerNumber2 > $('.banner2 li').length) { //만약 배너의 숫자보다 bannerNumber2의 숫자가 높아지면 1부터 다시 시작해라
+        bannerNumber2 = 1;
+      }
+      if(bannerNumber3 > $('.banner2 li').length){
+        bannerNumber3 = 1;
+      } 
+      
+    }
+  </script>
+
+    
+</body>
+</html>
